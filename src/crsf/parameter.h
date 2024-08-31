@@ -105,7 +105,7 @@ struct TextSelectionParameter {
 struct FolderParameter {
     std::string displayName;
 
-    constexpr FolderParameter(std::span<u8> data) {
+    FolderParameter(std::span<u8> data) {
         if (!data.empty())
             displayName = std::string(reinterpret_cast<char*>(data.data()));
     }
@@ -114,7 +114,7 @@ struct FolderParameter {
 struct InfoParameter {
     std::string display;
 
-    constexpr InfoParameter(std::span<u8> data) {
+    InfoParameter(std::span<u8> data) {
         display = std::string(reinterpret_cast<char*>(data.data()));
     }
 };
@@ -123,7 +123,7 @@ struct CommandParameter {
     CommandStep step;
     std::string status;
 
-    constexpr CommandParameter(std::span<u8> data) {
+    CommandParameter(std::span<u8> data) {
         step = static_cast<CommandStep>(data[0]);
         status = std::string(reinterpret_cast<char*>(data.data() + 1));
     }

@@ -129,7 +129,7 @@ class ElrsManager {
         SetThreadName("ELRS TX");
 
         std::chrono::time_point<std::chrono::steady_clock> wakeTime{std::chrono::steady_clock::now()}, pingTime{wakeTime};
-        constexpr std::chrono::milliseconds WakeInterval{100}, PingInterval{5000};
+        constexpr std::chrono::milliseconds WakeInterval{100}, PingInterval{300};
 
         bool recurringException{};
         while (!stopToken.stop_requested()) {
@@ -139,7 +139,7 @@ class ElrsManager {
             try {
                 if (pingsSinceLastRx >= 2) {
                     fmt::print("No packets received after two pings, resetting device\n");
-                    crsfInterface.ResetDevice();
+                    //crsfInterface.ResetDevice();
                     pingsSinceLastRx = 0;
                     earlyPing = true;
                 }
@@ -170,7 +170,7 @@ class ElrsManager {
                 fmt::print("TX Error: {}\n", e.what());
                 if (!crsfInterface.IsActive()) {
                     fmt::print("Serial port is inactive, stopping TX thread\n");
-                    requestStop = true;
+                    requestStop = false;
                     return;
                 }
                 if (recurringException) {

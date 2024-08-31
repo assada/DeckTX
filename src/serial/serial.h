@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <chrono>
+#include <optional>
 
 #if defined(_WIN32)
     #include <windows.h>

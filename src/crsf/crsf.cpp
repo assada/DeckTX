@@ -4,6 +4,7 @@
 #include "protocol.h"
 #include <chrono>
 #include <thread>
+#include <algorithm>
 
 #include "crsf.h"
 
